@@ -1,0 +1,221 @@
+:root {
+  --color-canvas: #f4f7f5;
+  --color-surface: #ffffff;
+  --color-surface-muted: #e7efeb;
+  --color-text: #15221b;
+  --color-text-muted: #526158;
+  --color-brand: #075c3c;
+  --color-brand-strong: #03452c;
+  --color-accent: #d7a62f;
+  --color-danger: #b42318;
+  --color-border: #cdd8d2;
+  --shadow-card: 0 16px 40px rgb(20 50 35 / 8%);
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --page-max-width: 70rem;
+  --page-gutter: clamp(1rem, 2.5vw, 2rem);
+  --page-width: min(calc(100% - 2 * var(--page-gutter)), var(--page-max-width));
+  --page-spacing: clamp(1.25rem, 2.5vw, 2rem);
+  --section-spacing: clamp(1.75rem, 3vw, 2.75rem);
+  --banner-padding: clamp(1.25rem, 2.5vw, 2rem);
+  --banner-gap: clamp(1rem, 2.2vw, 1.75rem);
+  --type-page-title: clamp(1.875rem, 1.25rem + 2vw, 3rem);
+  --type-section-title: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at top right, rgb(215 166 47 / 12%), transparent 24rem),
+    var(--color-canvas);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  background: var(--color-brand-strong);
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.app-shell {
+  width: var(--page-width);
+  min-width: 0;
+  margin-inline: auto;
+  padding-block: var(--page-spacing);
+}
+
+/* Let text and media reflow instead of masking an oversized layout. */
+main h1,
+main h2,
+main h3,
+main p {
+  overflow-wrap: anywhere;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+@media (max-width: 40rem) {
+  input,
+  textarea,
+  select {
+    font-size: 1rem;
+  }
+}
+
+.empty-state p,
+.error-state p {
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.empty-state,
+.error-state,
+.loading-state {
+  display: grid;
+  min-height: 12rem;
+  margin-top: 1.25rem;
+  padding: var(--banner-padding);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  background: var(--color-surface);
+}
+
+.empty-state p,
+.error-state p {
+  max-width: 34rem;
+  margin-top: 0.55rem;
+}
+
+.error-state button {
+  margin-top: 1.25rem;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  background: var(--color-brand);
+  font-weight: 700;
+}
+
+.loading-state {
+  gap: 0.85rem;
+}
+
+.loading-bar {
+  width: min(100%, 28rem);
+  height: 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-muted),
+    #ffffff,
+    var(--color-surface-muted)
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.4s infinite linear;
+}
+
+.loading-bar:nth-child(3) {
+  width: min(70%, 20rem);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-error {
+  margin-top: 0.4rem;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+@keyframes loading-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

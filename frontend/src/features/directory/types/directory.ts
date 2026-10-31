@@ -1,0 +1,41 @@
+export const departmentCodes = [
+  "cse",
+  "eee",
+  "me",
+  "ce",
+  "ete",
+  "bme",
+  "mme",
+  "mie",
+  "pme",
+  "wre",
+  "architecture",
+  "urp",
+] as const;
+
+export type DepartmentCode = (typeof departmentCodes)[number];
+
+export type FacultyMember = Readonly<{
+  id: string;
+  name: string;
+  initials: string;
+  designation: string;
+  email: string | null;
+  phone: string | null;
+  office: string | null;
+  profileUrl?: string | null;
+  expertise: readonly string[];
+}>;
+
+export type Department = Readonly<{
+  id: DepartmentCode;
+  shortName: string;
+  name: string;
+  academicArea: string;
+  description: string;
+  location: string | null;
+  officeEmail: string | null;
+  phone?: string | null;
+  sourceUrl?: string;
+  faculty: readonly FacultyMember[];
+}>;
